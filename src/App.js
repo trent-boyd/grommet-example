@@ -1,32 +1,41 @@
 import React from "react";
-import { Grommet } from "grommet";
+import { Box, Button, Grommet, Heading } from "grommet";
+import { Notification } from "grommet-icons";
 
-const theme = {
-  global: {
-    font: {
-      family: "Roboto",
-      size: "18px",
-      height: "20px"
-    }
-  }
-};
+import AppBar from "components/AppBar";
+import { theme } from "theme";
 
 function App() {
+  const [showSidebar, setShowSidebar] = React.useState(false);
   return (
-    <Grommet theme={theme}>
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Grommet theme={theme} full>
+      <Box fill>
+        <AppBar>
+          <Heading level="3" margin="none">
+            Example Grommet App
+          </Heading>
+          <Button
+            icon={<Notification />}
+            onClick={() => setShowSidebar(!showSidebar)}
+          />
+        </AppBar>
+        <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+          <Box flex align="center" justify="center">
+            APP BODY!
+          </Box>
+          {showSidebar && (
+            <Box
+              width="medium"
+              background="light-2"
+              elevation="small"
+              align="center"
+              justify="center"
+            >
+              SIDEBAR!
+            </Box>
+          )}
+        </Box>
+      </Box>
     </Grommet>
   );
 }
